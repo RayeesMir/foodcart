@@ -1,0 +1,78 @@
+<!-- @Author - Shoeb Raza <mail@shoebraza.com>
+     @Version - v1.0  -->
+
+
+<div class="editorHeader">
+  <nav role="navigation" class="teal">
+      <button class="btn left btn-flat" style="background:#26a69a;color:#eee" ng-click="$back()">BACK</button>
+      <button class="btn left btn-flat" style="background:#ccdcb9;color:#777;margin-left:10px" ng-click="save()" ng-bind="save_process"></button>
+      <div class="ed-title" data-ng-bind="product.name"></div>
+      <button class="btn btn-flat right" style="background:#fff;color:#26a69a" ng-click="addCart()">Add To Cart</button>
+  </nav>
+
+</div>
+
+<div class="customize-wrapper">
+    <div class="customize-sidebar">
+
+      <div class="customize-block">
+       <h5 class="teal">Print Border</h5>
+        <p>
+          <input class="with-gap" type="radio" ng-model="printBorder" value='15' id="opt1"/>
+          <label for="opt1">With Border</label>
+        </p>
+        <p>
+          <input class="with-gap" type="radio" ng-model="printBorder" value='0' id="opt2" />
+          <label for="opt2">Without Border</label>
+        </p>
+      </div>
+
+      <div class="customize-block" ng-show="printBorder=='15'" >
+        <h5 class="teal">Border Color</h5>
+        <div style="background:hsl({{hue}},70%,40%)" class="color-box effect" ng-repeat="hue in [30,60,90,120,160,190,210,250,280,320,360]" ng-click="changeBorder(hue,60,40)"></div>
+        <div style="background:#000;" class="color-box effect" ng-click="changeBorder(0,0,0)"></div>
+        <div style="background:#fff;border:1px solid #bbb;" class="color-box effect" ng-click="changeBorder(0,0,100)"></div>
+      </div>  
+
+    </div>
+
+    <div class="customize-box">       
+        <cropper class="customize-item animated fadeIn" style="height:{{config_height}}px;border:{{printBorder}}px solid {{borderColor}};background:{{borderColor}}" ng-repeat="photo in photos" image=photo width=250 height=350>      
+        </cropper>
+    </div>
+
+</div>
+
+
+<!-- <div class="crop-wrapper" ng-show="isCrop">
+      <div class="effect-slider"> -->
+<!--           <div class="thumb-item" ng-repeat="photo in photos">
+                <img src="{{photo.thumbPhoto}}"/>
+                <div class="photo-select" ng-click="showCropper($index,photo)">
+                </div>
+          </div> -->
+<!--    </div>
+
+      <div class="cropBox">
+          <div ng-hide="loader" style="background:#fff;color:#777;position:absolute;left:0;top:0;text-align:center;width:100%;height:100%;line-height:500px;z-index:999">
+                      Loading...
+          </div>
+          <i class="material-icons cancel-btn" ng-click="closeCrop()">highlight_off</i>
+          <image-cropper
+              image-url="{{croppedImage}}"
+              api="getApi"
+              show-controls=true
+              crop-callback="updateResultImage">
+          </image-cropper>
+          
+      </div>
+
+      <div class="thumb-slider">
+          <div class="thumb-item animated fadeIn" ng-repeat="photo in photos">
+                <img src="{{photo.thumbPhoto}}"/>
+                <div class="photo-select" ng-click="showCropper($index,photo)">
+
+                </div>
+          </div>
+      </div>
+</div> -->

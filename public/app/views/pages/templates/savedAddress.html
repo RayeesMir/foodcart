@@ -1,0 +1,126 @@
+<!-- @Author - Shoeb Raza <mail@shoebraza.com>
+	 @Version - v1.0  -->
+
+<h5>Saved Address</h5>
+
+<!-- ============ shipping address ============== -->
+	<p ng-hide="addresses.length || editAddress" style="display:block;padding:100px 0;color:#999;text-align: center">You do not have any saved address !!</p>
+
+	<!-- ============ edit address =========== -->			
+	<div class="addressForm" data-ng-show="editAddress"> 
+	  <form name="addressform" validate>
+		<div class="row">
+			<div class="col s3">
+				<label class="addrLabel">Name</label>
+			</div>
+			<div class="col s5">
+	          <input placeholder="Full Name" type="text" ng-model="addr.name" maxlength="20" class="validate">
+	        </div>
+		</div>
+		<div class="row">
+			<div class="col s3">
+				<label class="addrLabel">Pincode</label>
+			</div>
+			<div class="col s5">
+	          <input placeholder="Pincode" type="text" ng-model="addr.pincode"  ng-minlength="6" maxlength="6" class="validate">
+	        </div>
+		</div>
+		<div class="row">
+			<div class="col s3">
+				<label class="addrLabel">Address</label>
+			</div>
+			<div class="col s5">
+	          <textarea class="materialize-textarea" ng-model="addr.location"  ng-minlength="10" maxlength="40"></textarea>
+	        </div>
+		</div>
+		<div class="row">
+			<div class="col s3">
+				<label class="addrLabel">Landmark</label>
+			</div>
+			<div class="col s5">
+	          <input placeholder="Landamrk" type="text" ng-model="addr.landmark" maxlength="22" class="validate">
+	        </div>
+		</div>
+		<div class="row">
+			<div class="col s3">
+				<label class="addrLabel">Mobile</label>
+			</div>
+			<div class="col s5">
+	          <input placeholder="Mobile Number" type="text" ng-model="addr.mobile"  ng-minlength="10" maxlength="10" class="validate">
+	        </div>
+		</div>
+		<div class="row">
+			<div class="col s3">
+				<label class="addrLabel">City</label>
+			</div>
+			<div class="col s5">
+	          <input placeholder="City" type="text" ng-model="addr.city" class="validate">
+	        </div>
+		</div>
+
+		<div class="row">
+			<div class="col s3">
+				<label class="addrLabel">State</label>
+			</div>
+			<div class="col s5">
+			    <select style="z-index: 999"  ng-model="addr.state" material-select watch>
+			        <option ng-repeat="value in ['Uttar Pradesh','Delhi','Karnataka']">{{value}}</option>
+			    </select>
+	        </div>
+		</div>
+
+		<div class="row">
+			<div class="col s3"><label class="addrLabel">Address Type</label></div>
+			<div class="col s5">	
+	          <p style="line-height: 3rem">
+	          <input class="with-gap" ng-model="addr.type" type="radio" id="adr1" value="Home" checked/>
+			  <label for="adr1" style="padding-right:20px">Home</label>
+			  <input class="with-gap" ng-model="addr.type" type="radio" id="adr2" value="Office" />
+			  <label for="adr2" style="padding-right:20px">Office</label>
+			  <input class="with-gap" ng-model="addr.type" type="radio" id="adr3" value="Other"/>
+			  <label for="adr3" >Other</label>
+			  </p>
+	        </div>
+		</div>
+		<div class="row">
+			<div class="col s3">&nbsp;</div>	
+			<div class="col s8">
+	            <p style="padding:15px 0 30px 0">
+			      <input type="checkbox" id="adr5" ng-model="addr.default"/>
+			      <label for="adr5" style="font-size:1em">make this my default address</label>
+			    </p>
+	        </div>
+		</div>
+		<div class="row">
+			<div class="col s3">&nbsp;</div>
+			<div class="col s5">
+				<button type="submit" class="btn right" ng-click="addrSave(addr)">SAVE</button>
+				<button type="submit" class="btn right grey" style="margin:0 10px" ng-click="editAddress=false">Close</button>
+			</div>	
+		</div>
+	  </form>	
+	</div> <!-- / edit address -->
+
+	<!-- ============= list of saved addresses =========== --> 
+	<div class="addressForm" ng-hide="editAddress" data-ng-show="addresses.length"> 
+
+		<div class="addressCard" ng-click="addrSelect(address._id)" ng-repeat="address in addresses" ng-init="addr_selected[address._id]=address.default">
+			<div ng-class="{active:address.default}" class="addrType"><span data-ng-bind="address.type"></span> <span ng-show="address.default"> - default</span> </div>
+			<p data-ng-bind="address.name" class="addrName"></p>
+			<p><span data-ng-bind="address.location"></span>, <span data-ng-bind="address.city"></span></p>
+			<p><span data-ng-bind="address.state"></span><span data-ng-show="address.pincode"> - </span> <span data-ng-bind="address.pincode"></span></p>
+			<p style="padding-top:5px" data-ng-bind="address.landmark"></p>
+			<p style="padding-top:10px">Mobile No <span style="padding-left:10px;font-weight:400" data-ng-bind="address.mobile"></span></p>
+			
+			<!-- ==== card edit/delete option ==== -->
+			<div class="addressCardOption">
+				<span ng-click="addrEdit($event,$index)"><i class="material-icons ic">mode_edit</i> Edit</span>
+				<span ng-click="addrDelete($event,$index)"><i class="material-icons ic">delete</i> Delete</span>		
+			</div>
+		</div>	
+
+	</div> <!-- /list saved address -->
+
+	<div class="text-center" ng-hide="editAddress">
+		<button class="btn" style="width:50%;margin:20px 25% 0 25%" ng-click="addAddress()">ADD NEW ADDRESS</button>
+	</div>	

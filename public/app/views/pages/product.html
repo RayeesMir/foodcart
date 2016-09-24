@@ -1,0 +1,45 @@
+<!-- @Author - Shoeb Raza <mail@shoebraza.com>	 
+     @Version - v1.0  -->
+	 
+<div class="page">
+	<div class="container proBanner">
+	    <div class="backBtn" ng-click="$back()"><i class="material-icons">keyboard_backspace</i></div>
+		<img ng-src="{{product.imgUrls[0]}}" class="fleft"/>
+		<div class="proBanner-overlay">
+			<h1 class="white-text" ng-bind="product.name"></h1>
+			<h3 class="white-text">start @ Rs.300</h3>
+			<button class="gets" ng-click="getStart(product._id)">Get Started</button>
+		</div>	
+	</div>
+
+	<div class="container info">
+		<div class="row p-blue bMargin10">
+			<div class="col s12 m6 proimg no-xs">
+				<img ng-src="{{product.imgUrls[1]}}">
+			</div>
+
+			<div class="col s12 m6">
+				<div class="product-info"> 
+				     <h4 ng-bind="product.name"></h4>
+					 <p ng-bind="product.description"></p>
+		             <button class="gets" ng-click="getStart(product._id)">Get Started</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row noPaddingwrap">
+		    <div class="col s6 m4 noPadding">
+		        <img ng-src="{{product.imgUrls[2]}}" class="responsive-img" style="width:100%" alt="photo prints"/>
+		    </div>
+			<div class="col s6 m4 noPadding">
+		        <img ng-src="{{product.imgUrls[3]}}" class="responsive-img" style="width:100%" alt="photo prints"/>
+		    </div>
+		    <div class="col s12 m4 noPadding">
+		        <img ng-src="{{product.imgUrls[4]}}" class="responsive-img" style="width:100%" alt="photo prints"/>
+		    </div>
+	    </div>
+	</div>
+
+</div>	

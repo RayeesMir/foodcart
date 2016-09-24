@@ -1,0 +1,23 @@
+<!-- @Author - Shoeb Raza <mail@shoebraza.com>
+	 @Version - v1.0  -->
+
+<div class="page">
+	<div class="container">
+		<div style="margin-top:50px">
+			<!-- ===== side navigation ===== -->
+			<div class="sideNavigation">
+				<h5>My Account</h5>
+				<ul>
+					<li ng-class="{active:('orders.html'==tabUrl)}" ng-click="tabUrl='orders.html'">My Orders</li>
+					<li ng-class="{active:('savedAddress.html'==tabUrl)}" ng-click="tabUrl='savedAddress.html'">Saved Address</li>
+					<li ng-class="{active:('changePassword.html'==tabUrl)}" ng-click="tabUrl='changePassword.html'">Change Password</li>
+				</ul>
+			</div> <!-- / side navigation -->
+
+			<div class="profileBlock" ng-include="'/app/views/pages/templates/'+tabUrl">
+
+			</div>
+
+		</div>
+	</div>
+</div>

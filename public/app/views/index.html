@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Home | SHIFTZ FOOD CART</title>
+  <!--  <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'> -->
+
+	<!-- FOR ANGULAR ROUTING -->
+	<base href="/">
+  
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/> -->
+  <link href="/assets/font/flaticon.css" rel="stylesheet"/>
+	
+  <!-- CSS  -->
+	<link rel="stylesheet"  href="/assets/lib/materialize/dist/css/materialize.min.css"/>
+	<link rel="stylesheet" href="/assets/css/animate.css">
+	<link rel="stylesheet" href="/assets/css/style.css?ver=1.0.4">
+
+	<!-- JS LIBRARY -->
+	<script src="/assets/lib/jquery/dist/jquery.min.js"></script>
+	<script src="/assets/lib/materialize/dist/js/materialize.min.js"></script>
+	<script src="/assets/lib/angular/angular.min.js"></script>
+	<script src="/assets/lib/angular-materialize/src/angular-materialize.js"></script>
+	<script src="/assets/lib/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="/assets/lib/angular-animate/angular-animate.js"></script>
+  <script src="/assets/lib/angular-filter/dist/angular-filter.min.js"></script>
+  <script src="/assets/lib/ng-flow/ng-flow-standalone.js"></script>
+  <script src="/assets/lib/ng-image-cropper/dist/angular-image-cropper.js"></script>
+
+	<!-- CONTROLLERS -->
+	<script src="app/controllers/mainCtrl.js"></script>
+  <script src="app/controllers/loginCtrl.js"></script>
+  <script src="app/controllers/homeCtrl.js"></script>
+  <script src="app/controllers/productlistCtrl.js"></script>
+  <script src="app/controllers/productCtrl.js"></script>
+  <script src="app/controllers/accountCtrl.js"></script>
+  <script src="app/controllers/uploadCtrl.js"></script>
+  <script src="app/controllers/customizeCtrl.js"></script>
+  <script src="app/controllers/cartCtrl.js"></script>
+
+	<!-- SERVICES -->
+  <script src="app/services/authService.js"></script>
+  <script src="app/services/productService.js"></script>
+  <script src="app/services/userService.js"></script>
+  <script src="app/services/photoService.js"></script>
+  <script src="app/services/uploadService.js"></script>
+
+  <!-- DIRECTIVES -->
+  <script src="app/directives/componentDir.js"></script>
+  <script src="app/directives/cropDir.js"></script>
+
+	<!-- main Angular app files -->
+	<script src="app/app.routes.js"></script>
+	<script src="app/app.js"></script>
+</head>
+
+<body ng-app="ReduxApp" ng-controller="mainController as main">
+  
+  <!-- header view -->
+  <div data-ui-view="headerView"></div>
+
+  <!-- content view -->
+  <div data-ui-view="contentView"></div>
+
+  <!-- footer view -->
+  <div data-ui-view="footerView"></div>
+
+</body>
+</html>

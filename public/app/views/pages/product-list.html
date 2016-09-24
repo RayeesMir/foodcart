@@ -1,0 +1,35 @@
+
+	 
+<div class="page">
+ 
+<div class="container">
+ 
+	<ul class="menuBtn">
+		<li ng-click="filterBy('/products/')">All Products</li>
+		<li ng-repeat="menu in productCategory" ng-click="filterBy('/products/'+menu.slug)" ng-bind="menu.name"></li>
+	</ul>
+
+	<div class="row productCard">
+	    <a href="/product" ng-cloak ng-repeat="product in ProductList ">
+		<div class="col s12 m6 productCard-item" >
+			<!-- <img ng-src="{{product.image}}"/>
+	      	<div class="productCard-content"> 
+		   	  <div class="title" ng-bind="product.name">{{product.name}}</div> -->
+		   	  <input type="checkbox" aria-label="" style="position: relative; left:0px">
+		   	  <figure>
+  					<img ng-src="{{product.image}}" alt="The Pulpit Rock" width="304" height="228">
+  						<figcaption>{{product.name}} <br> <span class="price">Start @ Rs.{{product.price}} </span>
+  						</figcaption>  						
+				</figure>		   	  
+		    </div>    
+		    
+ 		</div>
+ 		<br>
+
+ 		</a>
+
+	<button type="button" class="btn btn-success pull-right" ng-click="total()">Place Order</button>
+
+</div>
+
+</div>

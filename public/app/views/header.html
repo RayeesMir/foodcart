@@ -1,0 +1,141 @@
+<!-- ========= header ========== -->
+  <div class="navbar-fixed">
+      <!-- ========= product dropdown ============= -->
+    <ul style="width:180px !important;min-width:150px !important" id="dropdown-product" class="dropdown-content">
+      <li ng-repeat="pc in productCategory"><a href="/products/{{pc.slug}}" class=" waves-effect black-text" style="text-transform:Capitalize !important;">{{pc.name}}</a></li>
+    </ul>
+
+    <!-- ============== account dropdown =========== -->
+    <ul ng-show="$root.userinfo.success" style="width:160px !important;min-width:150px !important" id="dropdown-account" class="dropdown-content">
+      <li><a href="/account" class=" waves-effect black-text"><i class="material-icons account-icons">account_circle</i>&nbsp; My Account</a></li>
+      <li><a href="#" ng-click="logout()" class="waves-effect black-text"><i class="material-icons account-icons" >power_settings_new</i>&nbsp; Logout</a></li>
+    </ul>
+    
+    <!-- ============== navigation menu ============== -->
+    <nav class="top animated1" data-ng-class="navType" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="/" class="brand-logo"><img src="/assets/images/logo.jpg"/></a>
+        <ul class="right hide-on-med-and-down">
+            <li>
+              <a class="dropdown-button waves-effect" href='javascript:void(0);' data-activates="dropdown-product" dropdown data-hover="true" data-beloworigin="true">
+              Products<i class="material-icons" style="float:right">arrow_drop_down</i>
+              </a>
+            </li>
+            <li ng-show="$root.userinfo.success">
+              <a href="/cart" class="waves-effect"><i class="material-icons">shopping_basket</i></a>
+            </li>
+            <li style="width:105px;overflow:hidden;height:65px">
+                <a ng-show="$root.userinfo.success" class="dropdown-button waves-effect right" href='javascript:void(0);' dropdown data-activates="dropdown-account" data-hover="true" data-beloworigin="true" data-alignment="right"><i class="material-icons" style="float:left;">person</i>{{$root.userinfo.name}}</a>   
+                <a ng-show="!$root.userinfo.success" href="#modal1" class="waves-effect right"  modal><i class="material-icons" style="float:left">person</i>Login</a>
+            </li>
+        </ul>
+
+        <!-- ========= Menu slider for mobile ============= -->
+        <a href="#" data-activates="nav-mobile" class="button-collapse white-text i1" data-sidenav="left" data-menuwidth="240" data-closeonclick="false">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="/products/" class="waves-effect">Products</a></li>
+          <li ng-show="!$root.userinfo.success"><a href="#modal1" class=" waves-effect"  modal>Login</a></li>
+          <li ng-show="$root.userinfo.success"><a href="/account" class=" waves-effect black-text">My Account</a></li>
+          <li ng-show="$root.userinfo.success"><a href="#" ng-click="logout()" class="waves-effect black-text">Logout</a></li> 
+        </ul> <!-- / menu slider mobile slider -->
+
+      </div>
+    </nav> <!-- / navigation menu -->
+
+  </div><!-- /header -->
+  <!-- Login Modal Structure -->
+  <div id="modal1" class="modal animated">
+  <a href="javascript:none" class="close-btn modal-action modal-close" style="padding:5px 0 0 2px"><i class="material-icons" style="font-size:30px">clear</i></a>
+      <div class="login-right">
+          <h4 class="text-center"><span>Welcome</span></h4>
+          <span class="login_err text-center" ng-bind="login_error"></span>
+          
+          <div class="form-wrap">
+
+            <!-- =============== Login Block ============== -->
+            <div class="row" id="login-form" ng-show="!$parent.signup">
+              <form name="loginForm" class="col s12" ng-submit="login(loginDetail)">
+                  <div class="input-field col s12">
+                    <input id="email" type="email" ng-model="loginDetail.username" class="validate">
+                    <label for="email">Email</label>
+                  </div>
+                  <div class="input-field col s12">
+                    <input id="password" type="password" autocomplete="false" ng-model="loginDetail.password" class="validate">
+                    <label for="password">Password</label>
+                  </div>
+                  <div class="input-field col s12 login-btn">
+                    <span id="forgot_password">forgot Password ? </span>
+                    <button type="submit" name="login" id="login" class="btn green waves-effect lighten-1 right"> Log In</button>
+                  </div>
+              </form>
+            </div> <!-- /login block -->
+
+            <!-- ================== SignUp block =================== -->
+            <div class="row" id="signup-form" ng-show="$parent.signup">
+              <div class="col s12">
+                <!-- ==== step 1 ==== -->
+                <div ng-show="step1">
+                 <form name="otpForm" ng-submit="sendOtp(user.mobile)" novalidate> 
+                  <div class="input-field col s12">
+                    <input id="tel" name="tel" ng-minlength="10" maxlength="10" autofocus="true" type="tel" ng-model="user.mobile" class="validate" required>
+                    <label for="tel">Mobile Number</label>
+                  </div>
+                   
+                  <div class="input-field col s12 login-btn">
+                    <button type="submit" name="s1" id="s1" class="btn green waves-effect lighten-1 right" ng-disabled="otpForm.$invalid"> SEND OTP</button>
+                  </div>
+                 </form> 
+                </div>  
+
+                <!-- ==== step 2 ==== -->
+                <div ng-show="step2">
+                 <form name="verifyOtpForm" ng-submit="verifyOtp(user.mobile,otp)" novalidate>
+                  <div class="input-field col s12">
+                    <input id="otp" name="otp" type="text" ng-minlength="6" ng-maxlength="6" maxlength="6" ng-model="otp" class="validate" required>
+                    <label for="otp">Enter OTP Code</label>
+                  </div>
+                  <div class="input-field col s12">
+                    <p ng-click="sendOtp(user.mobile)">Resend OTP</p> 
+                  </div>
+                  <div class="input-field col s12 login-btn">
+                    <!-- step2=false;step3=true; -->
+                    <button type="submit" name="s2" id="s2" class="btn green waves-effect lighten-1 right"> VERIFY OTP</button>
+                  </div> 
+                 </form> 
+                </div>  
+
+                <!-- ==== step 3 ==== -->
+                <div ng-show="step3">
+                 <form name="signupForm" ng-submit="createUser(otp,user)" novalidate>
+                  <div class="input-field col s12">
+                    <input id="firstname" name="firstname" type="text" ng-model="user.name" class="validate" required>
+                    <label for="firstname">First Name</label>
+                  </div>
+                  <div class="input-field col s12">
+                    <input id="uemail" name="uemail" type="email" ng-model="user.email" autocomplete="off" class="validate" required>
+                    <label for="uemail" data-error="Invalid email address">Email</label>
+                  </div>
+                   <div class="input-field col s12">
+                    <input id="upass" name="upass" type="password" ng-minlength="6"  autocomplete="off" ng-model="user.password" class="validate" required>
+                    <label for="upass">Password</label>
+                  </div>
+                  <div class="input-field col s12 login-btn">
+                    <button type="submit" name="signup" id="signup" class="btn green waves-effect lighten-1 right"> SUBMIT</button>
+                  </div>
+                 </form> 
+                </div>
+
+              </div>
+            </div> <!-- / SignUp block -->
+
+          </div>  
+          <div class="sign_up_btn">
+            <p class="blue-text text-lighten-1 text-center" ng-click="$parent.signup=!$parent.signup">
+            <span ng-hide="$parent.signup">New User ? Sign Up Now</span>
+            <span ng-show="$parent.signup">Have account ? login here </span>
+            </p>
+          </div>
+      </div>
+  </div>

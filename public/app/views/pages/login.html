@@ -1,0 +1,29 @@
+<!-- @Author - Shoeb Raza <mail@shoebraza.com>	 
+     @Version - v1.0  -->
+	 
+<div class="page">
+ 
+	<div class="container">
+		
+		<div class="loginWrap">
+			<h3 style="margin-bottom:30px">Login</h3>
+			<span class="login_err text-center" ng-bind="login_error_main"></span>
+			<form class="col s12" method="post" ng-submit="loginMain(loginData)">
+	          	<div class="input-field col s12">
+	            	<input id="email" type="email" ng-model="loginData.username" class="validate">
+	            	<label for="email">Email</label>
+	          	</div>
+	          	<div class="input-field col s12">
+	            	<input id="password" type="password" ng-model="loginData.password" class="validate">
+	            	<label for="password">Password</label>
+	          	</div>
+	          	<div class="input-field col s12 login-btn">
+	            	<span id="forgot_password">forgot Password ? </span>
+	            	<button type="submit" name="login" id="login" class="btn green waves-effect lighten-1 right"> Log In </button>
+	          	</div>
+	        </form>	
+		</div>
+
+	</div>
+
+</div>

@@ -1,0 +1,75 @@
+<!-- @Author - Shoeb Raza <mail@shoebraza.com>
+     @Version - v1.0  -->
+   
+<div class="editorHeader">
+  <nav role="navigation" class="teal">
+      <button class="btn left btn-flat" style="background:#26a69a;color:#eee" ng-click="$back()">BACK</button>
+      <div class="ed-title" data-ng-bind="product.name"></div>
+      <button tooltipped class="btn btn-flat right" ng-class="{ 'disabled' : enContinue }" style="background:#fff;color:#26a69a" data-position="left" data-delay="50" data-tooltip="{{nextPageMsg}}" ng-click="next()">NEXT</button>
+  </nav>
+
+</div>
+
+<div class="upload-wrapper" ng-cloak flow-prevent-drop flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
+    <div class="sideTab">
+      <div class="tabItemactive">
+        <p style="margin:0;font-size:1.5em;text-align: center;margin-top:0px"><span data-ng-bind="pics_selected">0</span>/<span data-ng-bind="pics_total">0</span></p>
+        <p style="margin:0;text-align:center;font-size:0.8em;margin-top:5px">Photo Selected</p>
+      </div>
+
+      <div class="tabItem">
+        <i style="margin:0;margin-top:10px;font-size:3em;cursor:pointer" class="material-icons">folder</i>
+        <p style="margin:0;text-align:center;cursor:pointer">UPLOADS</p>
+      </div>
+
+      <div class="tabItem">
+        <p style="margin:0;text-align:center;line-height:100px">FACEBBOK</p>
+      </div>
+
+      <div class="tabItem">
+        <p style="margin:0;text-align:center;line-height:100px">INSTAGRAM</p>
+      </div>
+    </div>
+
+    <!-- flow-files-submitted="$flow.upload()"  -->
+    <div flow-init flow-files-submitted="$flow.upload()" flow-complete="uploadSuccess()" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-file-success="fileSuccess( $file, $event, $flow )"  class="drop" flow-drop ng-class="dropClass">
+
+        <div class="dropper"></div>
+
+        <div class="upload-panel">
+          <button class="btn green" flow-btn><i class="material-icons" style="float:left;padding:0 5px 0 0;margin:0">file_upload</i> Add Photos</button>
+          <a href="#" class="slt" ng-click="select()">Select All</a>
+          <a href="#" class="slt" ng-click="deselect()">Deselect All</a>
+    <!--  <button class="btn green" ng-click="$flow.upload()">Start Upload</button> -->
+          <span class="label label-info" hide show-gt-xs ng-show="$flow.getSize()">Total Size: {{ ($flow.getSize()/(1024*1024)) | number:2 }} MB</span>
+        </div>
+        <div class="upload-box" ng-show="photos.length" ng-cloak>    
+            <h5>Saved Photos</h5>  
+            <div class="upload-item animated fadeIn" ng-repeat="photo in photos">
+                <img ng-src="{{photo.thumbPhoto}}"/>
+
+                <div class="photo-select" ng-init="pics_select[photo._id]=0" data-ng-hide="pics_select[photo._id]" data-ng-click="addPics(photo._id,photo)">
+                  <i class="check material-icons">check</i>
+                  <div class="select_msg">Please click to select Photo</div>
+                </div>
+
+                <div class="pics_add_btn" data-ng-show="pics_select[photo._id]" data-ng-click="addPics(photo._id,photo)"><i class="material-icons" style="color:#fff;font-size:2em;">add</i></div>
+                <div class="pics_remove_btn" data-ng-show="pics_select[photo._id]" data-ng-click="removePics(photo._id,photo)"><i class="material-icons" style="color:#fff;font-size:2em;">remove</i></div>
+                <div class="pics_count" data-ng-show="pics_select[photo._id]" data-ng-bind="pics_select[photo._id]" data-ng-click="addPics(photo._id,photo)"></div>
+
+            </div>
+        </div>
+
+        <div class="upload-info">
+            <div class="upload-bar" ng-clock ng-hide="file.isComplete() && !file.error" ng-repeat="file in $flow.files | orderBy:'-'">
+                <a class="black upload-cancel" ng-hide="file.isComplete()" ng-click="file.cancel()" title="cancel"><i class="material-icons" style="font-size:0.8em">clear</i></a>
+                <a class="red upload-cancel" ng-click="file.retry()" ng-show="file.error" title="retry"><i class="material-icons" style="font-size:0.8em">replay</i></a>  
+                <spinner value="file.progress() * 100" name="file.name" ng-hide="file.isComplete() && !file.error" class="spinner-fix"></spinner>  
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
